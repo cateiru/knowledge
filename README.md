@@ -8,6 +8,10 @@
 - [pacman と yay でシステムを更新する](arch-linux/system-update.md)
 - [パッケージ更新時のサプライチェーンの確認](arch-linux/supply-chain.md)
 
+## Cloudflare
+
+- [Cloudflare Worker Previews をプレビュー専用のリソースで使う](cloudflare/worker-previews.md)
+
 ## Claude Code
 
 - [Claude Code に作業の知識を毎回書き留めさせる](claude-code/knowledge-recording.md)
