@@ -12,6 +12,7 @@
 
 - [Cloudflare Worker Previews をプレビュー専用のリソースで使う](cloudflare/worker-previews.md)
 - [Workers Builds で pnpm モノレポのサブパッケージの Worker をデプロイする](cloudflare/workers-builds-monorepo.md)
+- [D1 の batch でまとめて削除する処理を sql.js でテストする](cloudflare/d1-batch-delete-sqljs-test.md)
 
 ## Claude Code
 
