@@ -61,7 +61,33 @@ Non-production branch deploy command:  npx wrangler preview --ignore-base-config
 ```
 
 pnpm はサブディレクトリで実行してもワークスペースのルートを見つけ、ワークスペース全体をインストールする。
-最初のビルドのログで、pnpm でインストールされていることを確かめる。
+実際のビルドでは、ログに `SKIP_DEPENDENCY_INSTALL is present in environment. Skipping automatic dependency installation.`
+が出たあと、ビルドコマンドの pnpm がワークスペースのルートの lockfile（`../../pnpm-lock.yaml`）で
+インストールし、成功した（2026年11月に確認）。
+
+なお、Root directory をリポジトリのルート（`/`）にしていたときの自動インストールは
+`pnpm install --frozen-lockfile` を実行していた。Root directory がサブディレクトリのときの自動インストールの
+動きは試していない。
+
+## プレビューのビルド設定はブランチごとにコピーされる
+
+ダッシュボードや API の「プレビューのビルド設定」（`previews_base_config`）は、ブランチで最初にビルドが
+走ったときに、そのブランチ専用のトリガーにコピーされる。あとから `previews_base_config` を変えても、
+すでにあるブランチのトリガーは古い設定のままで、次の push でも古い設定でビルドされる（実際に起きた）。
+
+Cloudflare CLI（`cf`）では、`--patch-existing-previews true` を付けると既存のプレビューのトリガーにも当たる。
+
+```sh
+cf workers scripts search --name <Worker 名>        # id が Worker のタグ
+cf builds workers get <Worker のタグ>                # 今の設定
+cf builds workers update <Worker のタグ> --patch-existing-previews true --body '{"previews_base_config": {...}}'
+cf builds triggers list --external-script-id <プレビューの ID>   # ブランチのトリガーに反映されたか
+cf builds create <トリガーの UUID> --body '{"branch":"<ブランチ名>"}'  # ビルドをやり直す
+cf builds logs get <ビルドの UUID>
+```
+
+ブランチのトリガーの `external_script_id` は、Worker のタグではなくプレビューの ID になっている。
+ビルドの詳細（`cf builds get <ビルドの UUID>`）の `trigger` で確かめられる。
 
 ## Worker Previews に必要な wrangler のバージョン
 
@@ -86,9 +112,11 @@ wrangler も、この組み合わせのときに「Worker を意図せず公開�
 
 - アカウント全体の Workers の Access（Protect all Workers）は、ほかの Worker の利用者も許可している
   ことがあるので、それだけに頼らない。
-- Worker 単位の Access（Worker の Access タブ → Protect this Worker behind Access → All traffic）に、
-  その Worker を使ってよい人だけを許可するポリシーを付ける。Worker 単位の Access は、Worker の routes・
-  カスタムドメイン・workers.dev・プレビューをまとめて保護する。
+- Worker 単位の Access（Worker の Access タブ → Protect this Worker behind Access）に、
+  その Worker を使ってよい人だけを許可するポリシーを付ける。All traffic なら Worker の routes・
+  カスタムドメイン・workers.dev・プレビューをまとめて、Previews only ならプレビューの URL だけを保護する
+  （Zero Trust では destination が `preview_worker` の Self-hosted アプリケーションになる）。
+  カスタムドメインに別の Self-hosted アプリケーションがあるなら Previews only でよい。
 - ダッシュボードで選べるポリシーは Cloudflare account と Email domain だけ。細かく決めたいときは、
   作られた Access アプリケーションを Zero Trust で開いてポリシーを付け替える。
 
@@ -109,7 +137,9 @@ workers.dev のプレビューやバージョンの URL は Worker 単位の Acc
 
 ## 確かめること
 
-URL を有効にしたら、次を確かめる（まだ試していない）。
+URL を有効にしたら、次を確かめる。Worker 単位の Access を **Previews only** で付けた状態で、
+ログインしていない `curl` からプレビューの URL・デプロイの URL・本番のカスタムドメインを開くと、
+どれも Access のログイン画面へ 302 でリダイレクトされた（2026年11月に確認）。
 
 - ログインしていないブラウザで、本番・プレビュー・デプロイの URL を開くと Access のログイン画面が出る。
 - 許可していないアカウントで認証すると拒否される。
