@@ -1,0 +1,62 @@
+#!/bin/bash
+# Mackerel check plugin: Linux software RAID (md) の状態を確認する
+# exit 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN
+# 出力（stdout）がアラートの本文になる
+
+shopt -s nullglob
+status=0
+msgs=()
+
+raise() { (( $1 > status )) && status=$1; }
+r() { cat "$1" 2>/dev/null || echo "$2"; }
+SYS=${MDRAID_SYSFS:-/sys/block}
+MDSTAT=${MDRAID_MDSTAT:-/proc/mdstat}
+
+arrays=("$SYS"/md*/md)
+if (( ${#arrays[@]} == 0 )); then
+  echo "CRITICAL: md アレイが1つも見つかりません（起動時に組み立てられていない可能性）"
+  cat "$MDSTAT" 2>/dev/null
+  exit 2
+fi
+
+for mddir in "${arrays[@]}"; do
+  dev=$(basename "$(dirname "$mddir")")
+  state=$(r "$mddir/array_state" unknown)
+  degraded=$(r "$mddir/degraded" 0)
+  action=$(r "$mddir/sync_action" idle)
+  disks=$(r "$mddir/raid_disks" unknown)
+
+  # 故障 (faulty) とマークされたメンバー
+  faulty=()
+  for rd in "$mddir"/dev-*; do
+    grep -q faulty "$rd/state" 2>/dev/null && faulty+=("${rd##*/dev-}")
+  done
+
+  if [[ "$degraded" != 0 ]]; then
+    raise 2; msgs+=("CRITICAL: $dev が縮退しています (degraded=$degraded / $disks 台中)")
+  elif (( ${#faulty[@]} > 0 )); then
+    raise 2; msgs+=("CRITICAL: $dev に故障ディスクがあります (${faulty[*]})")
+  fi
+
+  case "$state" in
+    clean|active|active-idle|write-pending) ;;
+    *) raise 2; msgs+=("CRITICAL: $dev の状態が異常です (array_state=$state)") ;;
+  esac
+
+  case "$action" in
+    idle|check) ;;
+    resync|recover|reshape|repair)
+      progress=$(r "$mddir/sync_completed" "")
+      raise 1; msgs+=("WARNING: $dev で $action を実行中 ($progress)") ;;
+    *) raise 1; msgs+=("WARNING: $dev の sync_action が想定外です ($action)") ;;
+  esac
+
+  (( status == 0 )) && msgs+=("OK: $dev ($disks 台, state=$state, sync=$action)")
+done
+
+printf '%s\n' "${msgs[@]}"
+if (( status > 0 )); then
+  echo "--- /proc/mdstat ---"
+  cat "$MDSTAT"
+fi
+exit $status
