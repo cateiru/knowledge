@@ -11,6 +11,7 @@
 ## Cloudflare
 
 - [Cloudflare Worker Previews をプレビュー専用のリソースで使う](cloudflare/worker-previews.md)
+- [Workers Builds で pnpm モノレポのサブパッケージの Worker をデプロイする](cloudflare/workers-builds-monorepo.md)
 
 ## Claude Code
 
