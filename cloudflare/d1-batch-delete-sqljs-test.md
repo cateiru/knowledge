@@ -65,3 +65,43 @@ Error: near "in": syntax error
 ## テストで NOT NULL 制約に引っかかる
 
 テストで行を入れるとき、Drizzle の `insert().values()` は型の上では必須の列を要求するが、Vitest は型チェックをしないため、必須の列が抜けていても実行時の `NOT NULL constraint failed` で初めて気づく。これも `tsc` を先に流せば防げる。
+
+## batch で消した行の ID を、batch の外の削除に使う
+
+親の行と一緒に消す子の行に、R2 のオブジェクト（画像など）が紐付いている場合があった。R2 の削除は D1 の batch に含められないため、DB と R2 のどちらかだけが成功する場合がある。次のように扱った（2026年11月）。
+
+- **順番は DB を先、R2 をあと** にする。R2 を先に消すと、batch が条件を満たさずに何も消さなかったとき（確認から削除までの間にオーナーが変わったなど）に、行は残るのに画像だけが消えた状態になる。
+- **消す対象の ID は、batch の DELETE に `.returning()` を付けて受け取る。** batch の前に SELECT で集める方法では、集めてから batch までの間に追加された子の行の画像を取りこぼす。batch はトランザクションなので、返ってきた ID は実際に消えた行と一致する。条件を満たさなければ空の配列が返る。
+- 画像の行が polymorphic な紐付け（`record_type` + `record_id`）の場合は、ID だけでなく種別でも絞る。別の種別（例: 共通のマスターデータの画像）の行を巻き込まないようにするため。
+- **R2 の削除に失敗しても、操作は成功として返す。** 親の行はもう消えていて、やり直す方法がないため、ログだけ残す。この場合は参照されないオブジェクトが残るので、掃除の仕組みが必要かどうかは別に判断する。
+
+Drizzle の `db.batch` の結果は、文の順に並んだタプルとして型が付く。そのため、必要な位置の結果だけを分割代入で取り出せる。位置を数え間違えても、`.returning()` を付けていない文の結果は型が違うので、`tsc` で気づける。
+
+```ts
+const [, deletedChildren, deletedParents] = await db.batch([
+  db.delete(grandChildren).where(and(inArray(grandChildren.childId, childIds), canRemove)),
+  db
+    .delete(children)
+    .where(and(eq(children.parentId, id), canRemove))
+    .returning({ id: children.id }),
+  db
+    .delete(parents)
+    .where(and(eq(parents.id, id), canRemove))
+    .returning({ id: parents.id }),
+]);
+if (deletedParents.length === 0) {
+  return null; // 何も消えていないので、R2 には触らない
+}
+try {
+  await deleteObjectsOf("<record_type>", deletedChildren.map(({ id }) => id));
+} catch (error) {
+  console.error("Failed to delete objects", error);
+}
+```
+
+テストで文を順番に実行するだけの簡易的な `db.batch` を使っても、各文の `.returning()` の結果はそのまま返ってくる。R2 は `delete` だけを持つオブジェクトと `Map` で置き換え、次のことを確かめた。
+
+- 消した子の行の画像だけが、R2 と画像の行の両方から消える。
+- ほかの親の画像と、別の種別の画像は残る。
+- 条件を満たさず削除できなかったときは、R2 の `delete` が呼ばれない。
+- R2 の `delete` が失敗しても、操作は成功として返る。
