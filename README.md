@@ -18,6 +18,10 @@
 
 - [Claude Code に作業の知識を毎回書き留めさせる](claude-code/knowledge-recording.md)
 
+## Next.js
+
+- [フォームを保存したあと、遷移先のページで確認のダイアログを出す](nextjs/confirm-dialog-after-submit.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
