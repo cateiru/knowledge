@@ -21,6 +21,7 @@
 ## Next.js
 
 - [フォームを保存したあと、遷移先のページで確認のダイアログを出す](nextjs/confirm-dialog-after-submit.md)
+- [form action で保存すると react-aria のチェックボックスが元に戻る](nextjs/react-aria-checkbox-form-reset.md)
 
 ## RAID
 
