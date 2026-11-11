@@ -24,6 +24,10 @@
 - [フォームを保存したあと、遷移先のページで確認のダイアログを出す](nextjs/confirm-dialog-after-submit.md)
 - [form action で保存すると react-aria のチェックボックスが元に戻る](nextjs/react-aria-checkbox-form-reset.md)
 
+## Playwright
+
+- [Playwright を更新したあとにヘッドレスシェルが見つからないときの対処](playwright/install-headless-shell.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
