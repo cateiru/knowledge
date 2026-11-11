@@ -27,6 +27,10 @@
 - [form action で保存すると react-aria のチェックボックスが元に戻る](nextjs/react-aria-checkbox-form-reset.md)
 - [RSC リクエストの `_rsc` 検証と CDN の Vary の関係](nextjs/rsc-cache-busting-and-cdn-vary.md)
 
+## Nivo
+
+- [Nivo の ScatterPlot で、日ごとの列に時刻の点を並べる](nivo/scatterplot-daily-columns.md)
+
 ## Playwright
 
 - [Playwright を更新したあとにヘッドレスシェルが見つからないときの対処](playwright/install-headless-shell.md)
