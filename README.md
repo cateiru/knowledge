@@ -26,6 +26,7 @@
 - [フォームを保存したあと、遷移先のページで確認のダイアログを出す](nextjs/confirm-dialog-after-submit.md)
 - [form action で保存すると react-aria のチェックボックスが元に戻る](nextjs/react-aria-checkbox-form-reset.md)
 - [RSC リクエストの `_rsc` 検証と CDN の Vary の関係](nextjs/rsc-cache-busting-and-cdn-vary.md)
+- [Server Action のあとに遷移しても、共有のレイアウトが描き直されない](nextjs/shared-layout-stale-after-replace.md)
 
 ## Nivo
 
