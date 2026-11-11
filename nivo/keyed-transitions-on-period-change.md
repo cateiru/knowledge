@@ -48,7 +48,7 @@ key が `カテゴリー.横軸の値`（月など）なので、期間を変え
 - [#1426 The chart gets deformed on re-render](https://github.com/plouc/nivo/issues/1426)：time スケールの折れ線でデータを切り替えると線が崩れる。再現手順がないまま閉じられた。
 - [#2507 Line graph being rendered incorrectly](https://github.com/plouc/nivo/issues/2507)：点が想定と違う順でつながる。再現できず閉じられた。
 
-上流で直る見込みは薄いので、下のカスタムレイヤーで回避する。上流に要望を出すなら、ScatterPlot の `nodeId` に当たる、点の id を指定するプロパティを `@nivo/line` に足してもらうのが筋。
+上流で直る見込みは薄いので、下のカスタムレイヤーで回避する。この要望（ScatterPlot の `nodeId` に当たる、点の id を指定するプロパティを `@nivo/line` に足す）は [#2873](https://github.com/plouc/nivo/issues/2873) として出した。
 
 ### 対処
 
