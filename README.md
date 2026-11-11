@@ -36,6 +36,10 @@
 
 - [Playwright を更新したあとにヘッドレスシェルが見つからないときの対処](playwright/install-headless-shell.md)
 
+## Vitest
+
+- [開閉状態を localStorage に保存する部品を Vitest でテストする](vitest/localstorage-persisted-disclosure-test.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
