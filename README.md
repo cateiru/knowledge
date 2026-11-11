@@ -30,6 +30,7 @@
 ## Nivo
 
 - [Nivo の ScatterPlot で、日ごとの列に時刻の点を並べる](nivo/scatterplot-daily-columns.md)
+- [Nivo のグラフで期間を絞り込んだとき、同じデータの点・線をつなげて動かす](nivo/keyed-transitions-on-period-change.md)
 
 ## Playwright
 
