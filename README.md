@@ -15,6 +15,7 @@
 - [D1 の batch でまとめて削除する処理を sql.js でテストする](cloudflare/d1-batch-delete-sqljs-test.md)
 - [外部キーのない参照先が論理削除される競合を、文の中の条件で防ぐ](cloudflare/d1-polymorphic-soft-delete-race.md)
 - [D1 のマイグレーションを本番に手動で適用する](cloudflare/d1-remote-migrations.md)
+- [ゾーンのキャッシュ状態をコマンドラインから集計する](cloudflare/cache-status-analytics.md)
 
 ## Claude Code
 
