@@ -40,6 +40,10 @@
 
 - [開閉状態を localStorage に保存する部品を Vitest でテストする](vitest/localstorage-persisted-disclosure-test.md)
 
+## SVG
+
+- [インライン SVG のアイコンの一部の色を、祖先の CSS 変数で差し替える](svg/recolor-icons-with-css-variables.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
