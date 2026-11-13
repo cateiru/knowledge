@@ -6,6 +6,7 @@
 
 - [ルートパーティションの容量を空ける](arch-linux/disk-cleanup.md)
 - [pacman と yay でシステムを更新する](arch-linux/system-update.md)
+- [yay で AUR のパッケージを入れる (Google Chrome を例に)](arch-linux/install-aur-package.md)
 - [パッケージ更新時のサプライチェーンの確認](arch-linux/supply-chain.md)
 
 ## Cloudflare
