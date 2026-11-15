@@ -10,7 +10,7 @@ Next.js を 16.3 系から 16.4.0 に上げると、本番で次のエラーが�
 Unexpected loadManifest(/.next/server/preview-props.json)
 ```
 
-いったん 16.3 系に戻し、OpenNext 1.20.12 が出てから、Next.js 16.4.2 と一緒に上げ直した。OpenNext 1.20.12 の `peerDependencies` は `next >=16.4.1` になっている。
+いったん 16.3 系に戻した。OpenNext 1.20.12 でこのエラーは直っていて、Next.js 16.4.2 と一緒に上げると手元のビルドでは動いた。OpenNext 1.20.12 の `peerDependencies` は `next >=16.4.1` になっている。
 
 ## 注意
 
