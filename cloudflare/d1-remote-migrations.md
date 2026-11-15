@@ -31,6 +31,13 @@ wrangler d1 execute <binding> --remote --json --command \
 
 `pragma_table_info()` は、使い方によっては D1 に拒否されたことがある。上の形の SELECT では通ったが、ほかの書き方で通るかは確かめていない。
 
+拒否されたときは `SQLITE_AUTH` のエラーになった。その場合は、`sqlite_master` の `sql` 列（`CREATE TABLE` の文）を読めば、列が追加されたかを確かめられる。
+
+```sh
+wrangler d1 execute <binding> --remote --json --command \
+  "SELECT sql FROM sqlite_master WHERE type='table' AND name='<table>'"
+```
+
 ## 7403 のエラーは一度再試行する
 
 `migrations list --remote` が、一度だけ次のエラーで失敗した。

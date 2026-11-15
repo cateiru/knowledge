@@ -18,6 +18,8 @@
 - [D1 のマイグレーションを本番に手動で適用する](cloudflare/d1-remote-migrations.md)
 - [D1（SQLite）の JSON 列から、特定のキーだけを外す](cloudflare/d1-json-remove-key.md)
 - [ゾーンのキャッシュ状態をコマンドラインから集計する](cloudflare/cache-status-analytics.md)
+- [D1 のバインドパラメーターの上限（100 個）を超えて 500 になる](cloudflare/d1-bound-parameter-limit.md)
+- [ダッシュボードでシークレットを変えると、プレビューのコードが本番に出ることがある](cloudflare/secret-edit-deploys-latest-uploaded-version.md)
 
 ## Claude Code
 
@@ -31,6 +33,7 @@
 - [Server Action のあとに遷移しても、共有のレイアウトが描き直されない](nextjs/shared-layout-stale-after-replace.md)
 - [全ページの title を「ページ名 | サイト名」にそろえる](nextjs/page-title-template.md)
 - [サーバーの入力エラーを表示した react-aria の入力欄で、直しても送信できない](nextjs/react-aria-server-validation-resubmit.md)
+- [Next.js と @opennextjs/cloudflare は一緒に上げる](nextjs/opennext-next-version-pairing.md)
 
 ## Nivo
 
@@ -40,6 +43,29 @@
 ## シェル
 
 - [find の -path に角括弧を含むディレクトリ名を書くと、一致しない](shell/find-path-brackets.md)
+- [pkill -f が、自分を実行しているシェルまで止めてしまう](shell/pkill-matches-own-shell.md)
+
+## Docker
+
+- [sudo を使わずに、コンテナが root で作ったファイルを消す](docker/remove-root-owned-files.md)
+- [node の slim イメージで wrangler dev（workerd）が起動しない](docker/node-slim-ca-certificates.md)
+
+## Node.js
+
+- [node-build の定義が古いとき、Node.js を nodenv に手で入れる](node/nodenv-install-from-tarball.md)
+
+## pnpm
+
+- [pnpm --filter で deploy スクリプトを動かすには run が必要](pnpm/filter-run-deploy.md)
+
+## GitHub
+
+- [PR のレビューコメントに、スレッドの返信として答える](github/reply-to-review-comments.md)
+
+## Web
+
+- [フォームの多いページが、パスワードマネージャーの拡張機能で固まる](web/password-manager-form-scan.md)
+- [iOS のホーム画面アプリで、ヘッダーがぼやける](web/ios-pwa-header-blur.md)
 
 ## Playwright
 
