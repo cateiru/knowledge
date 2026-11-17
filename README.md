@@ -61,6 +61,7 @@
 ## GitHub
 
 - [PR のレビューコメントに、スレッドの返信として答える](github/reply-to-review-comments.md)
+- [Codex の PR 自動レビューが終わったかを gh で判定する](github/codex-review-status.md)
 
 ## Web
 
