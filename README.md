@@ -67,6 +67,7 @@
 
 - [フォームの多いページが、パスワードマネージャーの拡張機能で固まる](web/password-manager-form-scan.md)
 - [iOS のホーム画面アプリで、ヘッダーがぼやける](web/ios-pwa-header-blur.md)
+- [curl で取った画像が gzip のまま保存される](web/curl-gzip-content-encoding.md)
 
 ## Playwright
 
