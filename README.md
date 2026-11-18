@@ -49,6 +49,7 @@
 
 - [sudo を使わずに、コンテナが root で作ったファイルを消す](docker/remove-root-owned-files.md)
 - [node の slim イメージで wrangler dev（workerd）が起動しない](docker/node-slim-ca-certificates.md)
+- [長く動かしっぱなしの next dev がメモリを食い尽くす](docker/next-dev-memory-growth.md)
 
 ## Node.js
 
