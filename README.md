@@ -93,6 +93,10 @@
 - [インライン SVG のアイコンの一部の色を、祖先の CSS 変数で差し替える](svg/recolor-icons-with-css-variables.md)
 - [数色で描かれた PNG のイラストを、マスクに分けて CSS 変数の色で塗る](svg/recolor-raster-illustration-with-masks.md)
 
+## MCP
+
+- [MCP のツールで「だれがいつ作成・編集したか」を返す](mcp/record-change-history-in-tools.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
