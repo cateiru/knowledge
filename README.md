@@ -78,6 +78,10 @@
 
 - [開閉状態を localStorage に保存する部品を Vitest でテストする](vitest/localstorage-persisted-disclosure-test.md)
 
+## VRT
+
+- [reg-suit の差分画像で、要素の高さが変わっただけかを見分ける](vrt/reg-suit-diff-layout-shift.md)
+
 ## CSS
 
 - [CSS だけで家系図のような図の接続線を描く](css/family-tree-connectors.md)

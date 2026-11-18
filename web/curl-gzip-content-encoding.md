@@ -35,3 +35,7 @@ file <file>.png  # PNG image data と出る
 mv <file>.png <file>.png.gz
 gunzip <file>.png.gz
 ```
+
+## 画像以外も同じ
+
+2026年11月に、同じレポートの `out.json` も `Content-Type: application/json` と `Content-Encoding: gzip` で返り、`--compressed` を付けずに取ると gzip のバイト列のまま表示された。レポートの中のファイルは、種類によらず `--compressed` を付けて取る。
