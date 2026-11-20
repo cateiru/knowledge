@@ -23,6 +23,8 @@
 - [ハッシュで保存していたメールアドレスを、平文の列へ段階的に移す](cloudflare/d1-hashed-email-to-plain-column.md)
 - [Drizzle の D1 の batch で、同じ列名を JOIN した SELECT の値が入れ替わる](cloudflare/drizzle-d1-batch-duplicate-columns.md)
 - [運用スクリプトから D1 を Drizzle で読み書きする（wrangler d1 execute をやめる）](cloudflare/scripts-d1-drizzle-get-platform-proxy.md)
+- [Workers のカスタムドメインを wrangler の routes で付け替える](cloudflare/workers-custom-domain-switch.md)
+- [Access のアプリケーションを cf コマンドで安全に書き換える](cloudflare/access-applications-cf-cli.md)
 
 ## Claude Code
 
