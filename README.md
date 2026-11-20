@@ -66,6 +66,7 @@
 ## pnpm
 
 - [pnpm --filter で deploy スクリプトを動かすには run が必要](pnpm/filter-run-deploy.md)
+- [モノレポで共通の依存のバージョンを pnpm の catalogs でまとめる](pnpm/catalogs-shared-deps.md)
 
 ## GitHub
 
