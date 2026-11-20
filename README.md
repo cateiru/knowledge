@@ -21,6 +21,8 @@
 - [D1 のバインドパラメーターの上限（100 個）を超えて 500 になる](cloudflare/d1-bound-parameter-limit.md)
 - [ダッシュボードでシークレットを変えると、プレビューのコードが本番に出ることがある](cloudflare/secret-edit-deploys-latest-uploaded-version.md)
 - [ハッシュで保存していたメールアドレスを、平文の列へ段階的に移す](cloudflare/d1-hashed-email-to-plain-column.md)
+- [Drizzle の D1 の batch で、同じ列名を JOIN した SELECT の値が入れ替わる](cloudflare/drizzle-d1-batch-duplicate-columns.md)
+- [運用スクリプトから D1 を Drizzle で読み書きする（wrangler d1 execute をやめる）](cloudflare/scripts-d1-drizzle-get-platform-proxy.md)
 
 ## Claude Code
 
@@ -46,6 +48,7 @@
 
 - [find の -path に角括弧を含むディレクトリ名を書くと、一致しない](shell/find-path-brackets.md)
 - [pkill -f が、自分を実行しているシェルまで止めてしまう](shell/pkill-matches-own-shell.md)
+- [zsh で、変数に入れたコマンドが「command not found」になる](shell/zsh-variable-command-no-word-splitting.md)
 
 ## Docker
 
@@ -56,6 +59,7 @@
 ## Node.js
 
 - [node-build の定義が古いとき、Node.js を nodenv に手で入れる](node/nodenv-install-from-tarball.md)
+- [Node.js の型ストリップで、拡張子なしで import し合う .ts を読む](node/register-hooks-extensionless-ts.md)
 
 ## pnpm
 
