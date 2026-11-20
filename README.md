@@ -27,6 +27,7 @@
 ## Claude Code
 
 - [Claude Code に作業の知識を毎回書き留めさせる](claude-code/knowledge-recording.md)
+- [バックグラウンドのコマンドの「完了」の通知が、終わる前に届くことがある](claude-code/background-task-early-notification.md)
 
 ## Next.js
 
@@ -38,6 +39,7 @@
 - [サーバーの入力エラーを表示した react-aria の入力欄で、直しても送信できない](nextjs/react-aria-server-validation-resubmit.md)
 - [Next.js と @opennextjs/cloudflare は一緒に上げる](nextjs/opennext-next-version-pairing.md)
 - [App Router で 404・500 のエラーページを作る](nextjs/error-pages.md)
+- [メンバー限定の画像を、招待された人にだけ招待のトークンで見せる](nextjs/invite-token-scoped-media.md)
 
 ## Nivo
 
