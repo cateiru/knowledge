@@ -34,6 +34,7 @@
 - [全ページの title を「ページ名 | サイト名」にそろえる](nextjs/page-title-template.md)
 - [サーバーの入力エラーを表示した react-aria の入力欄で、直しても送信できない](nextjs/react-aria-server-validation-resubmit.md)
 - [Next.js と @opennextjs/cloudflare は一緒に上げる](nextjs/opennext-next-version-pairing.md)
+- [App Router で 404・500 のエラーページを作る](nextjs/error-pages.md)
 
 ## Nivo
 
