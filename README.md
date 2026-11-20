@@ -20,6 +20,7 @@
 - [ゾーンのキャッシュ状態をコマンドラインから集計する](cloudflare/cache-status-analytics.md)
 - [D1 のバインドパラメーターの上限（100 個）を超えて 500 になる](cloudflare/d1-bound-parameter-limit.md)
 - [ダッシュボードでシークレットを変えると、プレビューのコードが本番に出ることがある](cloudflare/secret-edit-deploys-latest-uploaded-version.md)
+- [ハッシュで保存していたメールアドレスを、平文の列へ段階的に移す](cloudflare/d1-hashed-email-to-plain-column.md)
 
 ## Claude Code
 
