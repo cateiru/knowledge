@@ -99,6 +99,10 @@
 
 - [MCP のツールで「だれがいつ作成・編集したか」を返す](mcp/record-change-history-in-tools.md)
 
+## クローラー
+
+- [クロールした作品が、配信サイト側の ID の振り直しで重複登録される](crawler/duplicate-items-after-id-reissue.md)
+
 ## RAID
 
 - [Linux のソフトウェア RAID (md) を Mackerel で監視する](mdraid/README.md)
