@@ -154,3 +154,13 @@ app.use("/api/*", async (c, next) => {
 - Worker のテストは `createApp().request(url, init, env)` で、`env.ASSETS` に `fetch` だけを持つ偽物を渡す
 - Vitest の `test.projects` で、Worker（`environment: "node"`）と画面（`environment: "jsdom"`）を分けて実行した
 - 画面のテストで現在の URL を確かめるために `useLocation()` を描く要素を置くなら、`<output>` は使わない。`<output>` は role が `status` なので、`getByRole("status")` が複数の要素に当たって失敗した
+
+## 一覧と詳細の両方に同じ書き込みの操作を置く
+
+2026年11月に、一覧ページにあった書き込みの操作（権限の変更・メンバーの追加と削除など）を、あとから足した詳細ページ（`/users/:id` など）にも置いた。
+
+- フォーム・確認のダイアログ・結果の表示は、ページから切り出して一覧と詳細で共用する。移動先だけは使う側が決められるよう、操作が終わったら `onChanged(ok)` のようなコールバックを呼ぶ形にする
+- 書き込みの結果は、一覧と同じクエリ（`?roleChange=updated&user=<id>` など）を詳細の URL に付けて表示する。結果の表示の部品は「クエリの ID に一致する項目を、渡された一覧から探す」形にしておくと、詳細では 1 件だけの配列を渡せば同じ部品が使える
+- 同じ URL を開けば結果の表示を再現できるので、VRT（Playwright）では書き込まずに `?roleChange=updated...` を開いて撮れる
+- 詳細の API が 404 を返したときは、`useApi` のエラーの状態を見て「見つからない」ページを描く。読み込み中は `aria-busy` を出しておき、テストと VRT はそれが消えるのを待つ
+- 画面のテストで、パンくずのリンクとナビゲーションのタブが同じ名前（「ユーザー」など）だと `getByRole("link", { name })` が 2 つに当たる。`within(getByRole("navigation", { name: "パンくずリスト" }))` のように範囲を絞る
