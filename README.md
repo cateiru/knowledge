@@ -101,6 +101,7 @@
 
 - [CSS だけで家系図のような図の接続線を描く](css/family-tree-connectors.md)
 - [負のマージンではみ出させたボタンが隣との gap を打ち消す](css/negative-margin-hover-eats-gap.md)
+- [操作の列をなくした表で、日本語の列が 1 文字ずつ折り返す](css/cjk-table-column-shrinks.md)
 
 ## SVG
 
