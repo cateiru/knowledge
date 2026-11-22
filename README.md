@@ -27,6 +27,8 @@
 - [Workers のカスタムドメインを wrangler の routes で付け替える](cloudflare/workers-custom-domain-switch.md)
 - [Access のアプリケーションを cf コマンドで安全に書き換える](cloudflare/access-applications-cf-cli.md)
 - [Hono の API と Vite の React SPA を 1 つの Worker で配信する](cloudflare/workers-hono-api-vite-spa.md)
+- [Workers で大きな zip を R2 へ少しずつ書き出す](cloudflare/workers-streaming-zip-to-r2.md)
+- [next dev（getPlatformProxy）では、同じ Worker の Workflow を呼べない](cloudflare/workflows-get-platform-proxy.md)
 
 ## Claude Code
 
@@ -88,6 +90,7 @@
 ## Playwright
 
 - [Playwright を更新したあとにヘッドレスシェルが見つからないときの対処](playwright/install-headless-shell.md)
+- [ハイドレーション前にスクリーンショットを撮ると、Next.js の「Issue」が出る](playwright/screenshot-before-hydration.md)
 
 ## Vitest
 
