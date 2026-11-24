@@ -57,3 +57,48 @@ wrangler d1 migrations apply <binding> --remote --config <preview-config>.toml
 ```
 
 プレビュー専用の D1 の作り方は [Cloudflare Worker Previews をプレビュー専用のリソースで使う](worker-previews.md) を参照。
+
+## マージ前のブランチのマイグレーションを適用する
+
+マージと同時にデプロイされる構成で、新しいコードが新しい列を必ず読み書きするときは、マージより先に適用しておく必要がある（あとから適用すると、その間の書き込みが失敗する）。2026年11月に wrangler 4.165 で、次の手順で適用できた。
+
+先に、適用しても今のコードに影響しないかを SQL で確かめる。テーブルやインデックスの作成と、NULL を許す列の追加だけなら、古いコードはそのまま動く。列の削除や名前の変更、`NOT NULL` で既定値のない列の追加が混ざっている場合は、先に適用できない。
+
+手元の作業中のブランチを切り替えなくて済むように、PR のブランチを worktree に取り出す。`main` の最新を取り込んでいるかも確かめる。
+
+```sh
+git fetch origin
+git worktree add --detach /path/to/worktree origin/<branch>
+cd /path/to/worktree
+git merge-base --is-ancestor origin/main HEAD && echo ok
+```
+
+worktree で依存をインストールし直さなくても、元のリポジトリの wrangler を worktree の中で実行すれば、worktree の設定ファイルと `migrations_dir` が使われる。
+
+```sh
+/path/to/repo/node_modules/.bin/wrangler d1 migrations list <binding> --remote
+```
+
+ここに PR のマイグレーションだけが出ることを確かめる。ほかのものが出たら、それも一緒に適用されてしまう。
+
+プレビュー用の D1 があれば、先にそちらで試す。本番に適用する直前には、Time Travel のブックマークを控えておくと、問題があったときにその時点へ戻せる（控えただけで、実際の復元は試していない）。
+
+```sh
+wrangler d1 time-travel info <binding>
+wrangler d1 migrations apply <binding> --remote
+```
+
+復元はデータベース全体を戻すため、ブックマークのあとに書き込まれたデータも消える。追加だけのマイグレーションなら、戻さずに残しておいても害は少ない。
+
+追加した列が読めるかは、`COUNT` で確かめるのが簡単だった。列がなければエラーになり、あれば既存の行が NULL のままであることも 0 という結果で分かる。
+
+```sh
+wrangler d1 execute <binding> --remote --json --command \
+  "SELECT COUNT(<column>) AS filled, COUNT(*) AS total FROM <table>"
+```
+
+終わったら worktree を消す。
+
+```sh
+git worktree remove /path/to/worktree
+```
