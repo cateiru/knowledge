@@ -23,6 +23,7 @@
 - [ハッシュで保存していたメールアドレスを、平文の列へ段階的に移す](cloudflare/d1-hashed-email-to-plain-column.md)
 - [Drizzle の D1 の batch で、同じ列名を JOIN した SELECT の値が入れ替わる](cloudflare/drizzle-d1-batch-duplicate-columns.md)
 - [Drizzle で同じテーブルを 2 回 JOIN する](cloudflare/drizzle-join-same-table-twice.md)
+- [Drizzle の select に書いた相関サブクエリで、外側の列の表名が消える](cloudflare/drizzle-correlated-subquery-column-prefix.md)
 - [運用スクリプトから D1 を Drizzle で読み書きする（wrangler d1 execute をやめる）](cloudflare/scripts-d1-drizzle-get-platform-proxy.md)
 - [Workers のカスタムドメインを wrangler の routes で付け替える](cloudflare/workers-custom-domain-switch.md)
 - [Access のアプリケーションを cf コマンドで安全に書き換える](cloudflare/access-applications-cf-cli.md)
@@ -114,6 +115,7 @@
 ## MCP
 
 - [MCP のツールで「だれがいつ作成・編集したか」を返す](mcp/record-change-history-in-tools.md)
+- [MCP のツールの実装を、REST API と共用する](mcp/share-operations-with-rest-api.md)
 
 ## クローラー
 
