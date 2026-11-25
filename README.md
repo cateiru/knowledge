@@ -44,6 +44,7 @@
 - [Server Action のあとに遷移しても、共有のレイアウトが描き直されない](nextjs/shared-layout-stale-after-replace.md)
 - [全ページの title を「ページ名 | サイト名」にそろえる](nextjs/page-title-template.md)
 - [サーバーの入力エラーを表示した react-aria の入力欄で、直しても送信できない](nextjs/react-aria-server-validation-resubmit.md)
+- [react-aria-components の ComboBox でタグの入力欄（TagInput）を作る](nextjs/react-aria-tag-input.md)
 - [Next.js と @opennextjs/cloudflare は一緒に上げる](nextjs/opennext-next-version-pairing.md)
 - [App Router で 404・500 のエラーページを作る](nextjs/error-pages.md)
 - [メンバー限定の画像を、招待された人にだけ招待のトークンで見せる](nextjs/invite-token-scoped-media.md)

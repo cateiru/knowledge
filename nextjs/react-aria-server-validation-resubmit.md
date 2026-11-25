@@ -39,3 +39,5 @@ await input.evaluate((el) => [el.validity.valid, el.validationMessage, el.value]
 
 - `isRequired` のようなブラウザの必須チェックも、`"aria"` では送信を止めなくなる。必須かどうかはサーバー側で必ず検証する。
 - 単体テストで Server Action を直接呼ぶテストでは再現しない。実際のブラウザで「エラーを出す → 直す → 送り直す」まで操作して確かめる。
+- 画面の部品の単体テスト（Testing Library と jsdom）では再現できる。jsdom もブラウザの検証を行うため、エラーを表示した状態で送信ボタンをクリックし、`onSubmit` が呼ばれるかを確かめる（2026年11月に `TextField`・`ComboBox` で確認）。
+- `onSubmit` で送信を受け取り、エラーを自分の状態で持つフォームでも起きる。入力が変わったときにエラーの状態を消すと、直した後は送信できるようになる。`validationBehavior="aria"` も付けておけば、直さずに押したときもサーバーの検証までたどり着く。
