@@ -40,7 +40,9 @@
 `onKeyDownCapture` で、`ComboBox` とフォームより先に Enter を受け取る。
 
 ```ts
-if (event.target !== inputRef.current || event.nativeEvent.isComposing || event.keyCode === 229) {
+if (event.target !== inputRef.current) return;
+if (event.nativeEvent.isComposing || event.keyCode === 229) {
+  event.stopPropagation();
   return;
 }
 if (event.key === "Enter") {
@@ -53,8 +55,25 @@ if (event.key === "Enter") {
 ```
 
 - 日本語の変換を確定する Enter では追加しない。Safari は、変換を確定する Enter を、変換が終わった後の `keyCode` が 229 のキー入力として送ることが知られているため、`isComposing` と両方を見る（Safari の実機では試していない）。
+- 変換中のキーは `stopPropagation` で `ComboBox` にも渡さない。渡すと、`isComposing` が `false` で `keyCode` が 229 の Enter（Safari の場合）で候補の一覧が閉じた。`preventDefault` はしないので、変換の操作には影響しない。
 - `preventDefault` しないと、フォームの中では Enter で送信されてしまう。
 - 候補を選んでいるかは `aria-activedescendant` で分かる。見ないと、選んだ候補と入力途中の文字の 2 つが付く。
+
+### 変換の操作を確かめる
+
+Playwright の `fill`・`press` では変換を再現できない。Chromium では DevTools Protocol で再現できた。
+
+```ts
+const cdp = await page.context().newCDPSession(page);
+// 変換中の文字を表示する
+await cdp.send("Input.imeSetComposition", { text: "病院", selectionStart: 2, selectionEnd: 2 });
+// 変換中のキー入力。keyCode は 229 になる
+await cdp.send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "Enter", code: "Enter", windowsVirtualKeyCode: 229 });
+// 変換を確定する
+await cdp.send("Input.insertText", { text: "病院" });
+```
+
+`compositionstart`・`compositionend` と、`isComposing` が `true` の `keydown` が発火する。確定の後に `keyCode` 229 の Enter を送ると、Safari の順序も再現できる。
 
 ## 候補の幅
 
