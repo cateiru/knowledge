@@ -109,6 +109,7 @@
 - [負のマージンではみ出させたボタンが隣との gap を打ち消す](css/negative-margin-hover-eats-gap.md)
 - [操作の列をなくした表で、日本語の列が 1 文字ずつ折り返す](css/cjk-table-column-shrinks.md)
 - [角丸の基礎値のトークンを大きくするときに確かめること](css/raise-base-radius-token.md)
+- [スクロールバーの出し入れで横幅がずれるのを scrollbar-gutter で防ぐ](css/scrollbar-gutter-stable.md)
 
 ## SVG
 
